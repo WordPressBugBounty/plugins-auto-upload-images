@@ -104,6 +104,30 @@
                                     <p><textarea name="exclude_urls" rows="10" cols="50" id="exclude_urls" class="large-text code" placeholder="https://irani.im"><?php echo esc_textarea(self::getOption('exclude_urls')); ?></textarea></p>
                                 </td>
                             </tr>
+                            <tr valign="top">
+                                <th scope="row">
+                                    <label for="custom_fields">
+                                        <?php _e('Custom Fields:', 'auto-upload-images'); ?>
+                                    </label>
+                                </th>
+                                <td>
+                                    <p>
+                                        <?php $selectedFields = self::getOption('custom_fields'); ?>
+                                        <?php $customFields = self::getCustomFields(); ?>
+                                        <?php if (count($customFields) > 0): ?>
+                                            <?php foreach ($customFields as $field): ?>
+                                                <label>
+                                                    <input type="checkbox" name="custom_fields[]" value="<?php echo esc_attr($field) ?>" <?php echo is_array($selectedFields) && in_array($field, $selectedFields, true) ? 'checked' : ''; ?>> <?php echo esc_attr($field) ?>
+                                                    <br>
+                                                </label>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <em><?php _e('No custom fields found.', 'auto-upload-images'); ?></em>
+                                        <?php endif; ?>
+                                    </p>
+                                    <p class="description"><?php _e('Image urls inside the selected custom fields are also uploaded and replaced when a post is saved (text values only).', 'auto-upload-images'); ?></p>
+                                </td>
+                            </tr>
                         </table>
                         <p class="submit">
                             <?php submit_button(null, 'primary', 'submit', false); ?>
@@ -120,9 +144,6 @@
                     <div class="inside">
                         <div class="main">
                             <ul>
-                                <li class="dashicons-before dashicons-heart" style="color: #82878c">
-                                    <a href="https://irani.im/wp-auto-upload-images.html#donate" title="Support & Donate" style="text-decoration: none" target="_blank"><?php _e('Support and Donate to the Plugin', 'auto-upload-images'); ?></a>
-                                </li>
                                 <li class="dashicons-before dashicons-flag" style="color: #82878c">
                                     <a href="https://github.com/airani/wp-auto-upload/issues/new" style="text-decoration: none" target="_blank"><?php _e('Report Bug and Issues', 'auto-upload-images'); ?></a>
                                 </li>
@@ -138,11 +159,9 @@
                                     </a>
                                 </li>
                                 <li class="dashicons-before dashicons-admin-links" style="color: #82878c">
-                                    <a href="https://irani.im/wp-auto-upload-images.html" style="text-decoration: none" target="_blank"><?php _e('Official Page', 'auto-upload-images'); ?></a>
+                                    <a href="https://irani.im" style="text-decoration: none" target="_blank"><?php _e('Developer', 'auto-upload-images'); ?></a>
                                 </li>
                             </ul>
-                            <hr>
-                            <p><i class="dashicons-before dashicons-heart" style="color: #de0000"></i> <?php _e('If you want to help to plugin development and if you can do so please make a donation to the project and encourage others to do so, for more updates and more features.', 'auto-upload-images'); ?> <a href="https://irani.im/wp-auto-upload-images.html#donate" title="Support & Donate" target="_blank"><?php _e('Make a Donation', 'auto-upload-images') ?></a></p>
                             <hr>
                             <p><?php _e('If you are a wp developer and like to contribute to this plugin development or you are a translator and want to have this plugin in your language you can start from <a href="https://github.com/airani/wp-auto-upload" target="_blank">plugin Github repository</a>.', 'auto-upload-images') ?></p>
                         </div>
